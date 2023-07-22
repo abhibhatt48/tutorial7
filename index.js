@@ -11,13 +11,13 @@ app.use(express.json());
 const uri = process.env.ATLAS_URI;
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const itemsRouter = require('./routes/items');
-app.use('/items', itemsRouter);
-
 const connection = mongoose.connection;
 connection.once('open', () => {
     console.log("MongoDB database connection established successfully");
 });
+
+const userRouter = require('./routes/users'); 
+app.use('/users', userRouter); 
 
 app.listen(5000, () => {
     console.log('Server is running on port 5000');
